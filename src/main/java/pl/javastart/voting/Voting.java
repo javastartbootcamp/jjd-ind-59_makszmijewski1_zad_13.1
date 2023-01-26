@@ -27,8 +27,34 @@ public class Voting {
      * Metoda powinna pobrać głos dla każdego przekazanego głosującego i zapisać wyniki głosowania do VotingResult
      */
     VotingResult executeVoting(List<String> voters, Scanner scanner) {
+        VotingResult votingResult = new VotingResult();
+        List<Vote> votes = new ArrayList<>();
+        votingResult.setVotes(votes);
 
-        return null; // to możesz (a nawet powinieneś/powinnaś) zmienić :)
+        String choice = "";
+        for (String voter : voters) {
+            boolean condition = true;
+            System.out.println("Jak głosuje " + voter + "? (z - za, p - przeciw, w - wstrzymanie się)");
+            while (condition) {
+                choice = scanner.nextLine();
+                switch (choice) {
+                    case "z" -> {
+                        votes.add(new Vote(voter, true));
+                        condition = false;
+                    }
+                    case "p" -> {
+                        votes.add(new Vote(voter, false));
+                        condition = false;
+                    }
+                    case "w" -> {
+                        votes.add(new Vote(voter, null));
+                        condition = false;
+                    }
+                    default -> System.out.println("Zagłosuj jeszcze raz");
+                }
+            }
+        }
+        return votingResult;
     }
 
 }
