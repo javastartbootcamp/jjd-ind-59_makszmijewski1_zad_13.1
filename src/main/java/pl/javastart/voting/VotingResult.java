@@ -33,28 +33,24 @@ public class VotingResult {
         int refrainCounter = 0;
         double allVotesCounter = 0;
         for (Vote vote : votes) {
-            try {
-                if (vote.getVote() == true) {
-                    forVotesCounter++;
-                    allVotesCounter++;
-                } else if (vote.getVote() == false) {
-                    againstVotesCounter++;
-                    allVotesCounter++;
-                } else if (vote.getVote() == null) {
-                    continue;
-                }
-            } catch (NullPointerException e) {
+            if (vote.getVote() == true) {
+                forVotesCounter++;
+                allVotesCounter++;
+            } else if (vote.getVote() == false) {
+                againstVotesCounter++;
+                allVotesCounter++;
+            } else if (vote.getVote() == null) {
                 refrainCounter++;
                 allVotesCounter++;
             }
-        }
-        double percentFor = forVotesCounter / allVotesCounter * 100;
-        double percentAgainst = againstVotesCounter / allVotesCounter * 100;
-        double percentRefrain = refrainCounter / allVotesCounter * 100;
-        System.out.println("Głosów za: " + df.format(percentFor) + "%");
-        System.out.println("Głosów przeciw: " + df.format(percentAgainst) + "%");
-        System.out.println("Wstrzymało się: " + df.format(percentRefrain) + "%");
+            double percentFor = forVotesCounter / allVotesCounter * 100;
+            double percentAgainst = againstVotesCounter / allVotesCounter * 100;
+            double percentRefrain = refrainCounter / allVotesCounter * 100;
+            System.out.println("Głosów za: " + df.format(percentFor) + "%");
+            System.out.println("Głosów przeciw: " + df.format(percentAgainst) + "%");
+            System.out.println("Wstrzymało się: " + df.format(percentRefrain) + "%");
 
+        }
     }
 
     /**
