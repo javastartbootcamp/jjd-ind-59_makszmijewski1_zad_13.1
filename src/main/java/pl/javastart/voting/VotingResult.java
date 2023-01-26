@@ -33,14 +33,14 @@ public class VotingResult {
         int refrainCounter = 0;
         double allVotesCounter = 0;
         for (Vote vote : votes) {
-            if (vote.getVote() == true) {
-                forVotesCounter++;
+            if (vote.getVote() == null) {
+                refrainCounter++;
                 allVotesCounter++;
-            } else if (vote.getVote() == false) {
+            } else if (!vote.getVote()) {
                 againstVotesCounter++;
                 allVotesCounter++;
-            } else if (vote.getVote() == null) {
-                refrainCounter++;
+            } else if (vote.getVote()) {
+                forVotesCounter++;
                 allVotesCounter++;
             }
         }
@@ -60,19 +60,14 @@ public class VotingResult {
      * Nie zmieniaj sygnatury tej metody!
      */
     public void printVoteForVoter(String voterName) {
-
         for (Vote vote : votes) {
             if (voterName.equals(vote.getVoter())) {
-                try {
-                    if (vote.getVote() == true) {
-                        System.out.println(vote.getVoter() + ": ZA");
-                    } else if (vote.getVote() == false) {
-                        System.out.println(vote.getVoter() + ": PRZECIW");
-                    } else {
-                        continue;
-                    }
-                } catch (NullPointerException e) {
+                if (vote.getVote() == null) {
                     System.out.println(vote.getVoter() + ": WSTRZYMAŁ SIĘ");
+                } else if (vote.getVote() == true) {
+                    System.out.println(vote.getVoter() + ": ZA");
+                } else if (vote.getVote() == false) {
+                    System.out.println(vote.getVoter() + ": PRZECIW");
                 }
             }
         }
